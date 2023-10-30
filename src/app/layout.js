@@ -1,5 +1,10 @@
+"use client"
 import './globals.css'
 import { Inter } from 'next/font/google'
+import StateProvider from '@/context/stateContext'
+import reducer,{initialState} from '@/context/stateReducers'
+import Navbar from '@/components/navbar'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,9 +14,23 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <StateProvider initialState={initialState} reducer={reducer}>
+      <div className=' p-4 w-[96%] mx-auto'>
+        <div>
+        <Navbar />
+        </div>
+        <div>{children}</div>
+        
+        
+      </div>
+      </StateProvider>
+        
+        </body>
     </html>
   )
 }
